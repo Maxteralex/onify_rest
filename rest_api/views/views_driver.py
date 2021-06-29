@@ -8,7 +8,6 @@ from django.shortcuts import get_object_or_404
 
 
 class DriverListView(APIView):
-    permission_classes = [IsAdminUser]
 
     def get(self, request, *args, **kwargs):
         """
@@ -20,7 +19,6 @@ class DriverListView(APIView):
 
 
 class DriverCreateView(APIView):
-    permission_classes = [IsAdminUser]
 
     def post(self, request, *args, **kwargs):
         """
@@ -34,7 +32,6 @@ class DriverCreateView(APIView):
 
 
 class DriverUpdateView(APIView):
-    permission_classes = [IsAdminUser]
 
     def post(self, request, driver_id, *args, **kwargs):
         """
@@ -43,12 +40,11 @@ class DriverUpdateView(APIView):
         serializer = DriverSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.update(validated_data=request.data, driver_id=driver_id)
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({"error": True, "error_msg": serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DriverDeleteView(APIView):
-    permission_classes = [IsAdminUser]
 
     def get(self, request, driver_id, *args, **kwargs):
         """

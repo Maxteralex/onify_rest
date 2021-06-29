@@ -8,7 +8,6 @@ from django.shortcuts import get_object_or_404
 
 
 class BusListView(APIView):
-    permission_classes = [IsAdminUser]
 
     def get(self, request, *args, **kwargs):
         """
@@ -20,7 +19,6 @@ class BusListView(APIView):
 
 
 class BusCreateView(APIView):
-    permission_classes = [IsAdminUser]
 
     def post(self, request, *args, **kwargs):
         """
@@ -34,7 +32,6 @@ class BusCreateView(APIView):
 
 
 class BusUpdateView(APIView):
-    permission_classes = [IsAdminUser]
 
     def post(self, request, bus_id, *args, **kwargs):
         """
@@ -43,12 +40,11 @@ class BusUpdateView(APIView):
         serializer = BusSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.update(validated_data=request.data, bus_id=bus_id)
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         return Response({"error": True, "error_msg": serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class BusDeleteView(APIView):
-    permission_classes = [IsAdminUser]
 
     def get(self, request, bus_id, *args, **kwargs):
         """
