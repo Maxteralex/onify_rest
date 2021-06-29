@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.validators import RegexValidator
 from django.db.models.fields.related import ForeignKey
 
 
@@ -7,7 +6,7 @@ class Bus(models.Model):
     bus_id = models.AutoField(primary_key=True)
     brand = models.CharField(max_length=128)
     plate = models.CharField(max_length=8)
-    route = models.ForeignKey('Route', on_delete=models.CASCADE, blank=True, null=True)
+    bus_number = models.IntegerField(blank=True, null=True)
 
 
 class BusStop(models.Model):

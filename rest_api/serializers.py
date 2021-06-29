@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_api.models import Bus, Driver, Route
+from rest_api.models import Bus, BusStop, Driver, Route
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -19,30 +19,45 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
 
-# class BusSerializer(serializers.ModelSerializer):
+class BusSerializer(serializers.ModelSerializer):
 
-#     def create(self, validated_data):
-#         bus = Bus()
-#         return user
+    def create(self, validated_data):
+        bus = Bus(**validated_data)
+        bus.save()
+        return bus
+    
+    def update(self, validated_data, marker_id):
+        bus = get_object_or_404(Bus, marker_id=marker_id)
+        bus.brand = validated_data['brand']
+        bus.plate = validated_data['plate']
+        bus.bus_number = validated_data['bus_number']
+        bus.save()
+        return bus
 
-#     class Meta:
-#         model = Bus
-#         fields = ('brand', 'plate', 'route')
+    class Meta:
+        model = Bus
+        fields = ('brand', 'plate', 'bus_number')
 
 
 class BusStopSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
-        user = User.objects.create_user(**validated_data)
-        return user
+        bus_stop = BusStop(**validated_data)
+        bus_stop.save()
+        return bus_stop
+
+    def update(self, validated_data, marker_id):
+        bus_stop = get_object_or_404(BusStop, marker_id=marker_id)
+        bus_stop.latitude = validated_data['latitude']
+        bus_stop.longitude = validated_data['longitude']
+        bus_stop.title = validated_data['title']
+        bus_stop.address = validated_data['address']
+        bus_stop.save()
+        return bus_stop
 
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
-        extra_kwargs = {
-            'email': {'unique': True, 'required': True},
-            'username': {'unique': True}
-        }
+        model = BusStop
+        fields = ('latitude', 'longitude', 'title', 'address')
 
 
 class DriverSerializer(serializers.ModelSerializer):
