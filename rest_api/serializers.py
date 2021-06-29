@@ -83,4 +83,4 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
-        fields = ('name', 'route_number')
+        fields = ('route_id', 'name', 'route_number')
