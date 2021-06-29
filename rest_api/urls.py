@@ -1,14 +1,10 @@
 from django.urls import path
-from rest_api.views.views_user import UserListView
 from rest_api.views.views_bus import BusListView, BusCreateView, BusUpdateView, BusDeleteView
 from rest_api.views.views_bus_stop import BusStopListView, BusStopCreateView, BusStopUpdateView, BusStopDeleteView
 from rest_api.views.views_driver import DriverListView, DriverCreateView, DriverUpdateView, DriverDeleteView
 from rest_api.views.views_route import RouteListView, RouteCreateView, RouteUpdateView, RouteDeleteView
 
 urlpatterns = [
-    # User
-    path('user', UserListView.as_view(), name='users'),
-
     # Bus
     path('bus/view', BusListView.as_view(), name='bus_list'),
     path('bus/create', BusCreateView.as_view(), name='bus_create'),

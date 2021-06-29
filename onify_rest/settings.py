@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-9f+sn=_cc89gwd^lxo7=x%cs6l!0^(l6ik4zsy*bd8nn-)t8pd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bloc-login-test.herokuapp.com/']
+ALLOWED_HOSTS = ['onify-rest.herokuapp.com/']
 
 
 # Application definition
@@ -53,15 +53,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
-}
 
 ROOT_URLCONF = 'onify_rest.urls'
 
