@@ -26,7 +26,8 @@ class DriverCreateView(APIView):
         """
         serializer = DriverSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(validated_data=request.data)
+            driver = serializer.create(validated_data=request.data)
+            serializer.data['driver_id'] = driver.driver_id
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": True, "error_msg": serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
 

@@ -26,7 +26,8 @@ class BusStopCreateView(APIView):
         """
         serializer = BusStopSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
-            serializer.create(validated_data=request.data)
+            bus_stop = serializer.create(validated_data=request.data)
+            serializer.data['marker_id'] = bus_stop.marker_id
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": True, "error_msg": serializer.error_messages}, status=status.HTTP_400_BAD_REQUEST)
 
