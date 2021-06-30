@@ -47,4 +47,4 @@ class RouteStop(models.Model):
 class Route(models.Model):
     route_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=256)
-    route_number = models.IntegerField(unique=True)
+    route_number = models.IntegerField()
